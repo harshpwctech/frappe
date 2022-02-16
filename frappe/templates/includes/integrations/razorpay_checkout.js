@@ -16,6 +16,26 @@ $(document).ready(function(){
 			},
 			"notes": {{ frappe.form_dict|json }}
 		};
+	 	if ("{{ payment_mode }}" != ""){
+			options.config = {
+				"display": {
+					"blocks": {
+						"banks": {
+							"name": 'Pay via {{ payment_mode }}',
+							"instruments": [
+								{
+									"method": "{{ payment_mode }}"
+								}
+							]
+						}
+					},
+					"sequence": ['block.banks'],
+					"preferences": {
+						"show_default_blocks": false,
+					},
+				},
+			}
+		}
 
 		var rzp = new Razorpay(options);
 		rzp.open();
