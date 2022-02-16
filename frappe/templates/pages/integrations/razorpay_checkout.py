@@ -25,6 +25,10 @@ def get_context(context):
 		context['amount'] = flt(context['amount'])
 		context['subscription_id'] = payment_details['subscription_id'] \
 			if payment_details.get('subscription_id') else ''
+		context['payment_mode'] = payment_details['payment_mode'].lower() \
+			if payment_details.get('payment_mode') else ''
+		context['payer_mobile'] = '' \
+			if payment_details.get('payer_mobile') else ''
 
 	except Exception as e:
 		frappe.redirect_to_message(_('Invalid Token'),
